@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+body{
+    background-image: url("bg.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    margin-top: 30px;
+}
+
+#nav_bar{
+    background-color: rgb(53, 53, 53);
+    font-size: 18px;
+    font-family: 'Noto Serif', serif;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+#nav_bar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 45px;
+    text-decoration: none;
+    margin:5px;
+}
+
+#nav_bar a:hover {
+    font-weight: bold;
+    background: #ddd;
+    color: black;
+}
+
+#nav_login{
+    position: absolute;
+    right: 0%;
+}
+
+#filter_main{
+    background-color: rgb(53, 53, 53);
+    width:90%;
+    margin-top:30px;
+    margin-left: auto;
+    margin-right: auto;
+    color:#ddd;
+    padding: 8px;
+}
+
+#trips_title{
+    display: inline;
+    width:fit-content;
+    font-size: 62px;
+    margin:5px;
+    padding: 10px;
+    padding-left: 5%;
+}
+
+#new_trip{
+    margin-left: auto;
+    margin-right: auto;
+    width:fit-content;
+    font-size: 40px;
+    padding:5px;
+    margin-top: 8px;
+    margin-right: 7%;
+    float: right;
+}
+
+#new_trip:hover{
+    background: #ddd;
+    color: black;
+}
+
+#new_trip_body{
+    background-color: rgb(53, 53, 53);
+    width:fit-content;
+    margin-top:30px;
+    margin-left: auto;
+    margin-right: auto;
+    color:#ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+label, input, button{
+    margin:5px;
+    padding:5px;
+}
+
+button{
+    font-size: 26px;
+    background-color: rgb(53, 53, 53);
+    color:#ddd;
+}
+
+button:hover{
+    background-color:#ddd;
+    color:rgb(53, 53, 53);
+}
+#map{
+    height: 400px;
+    width: 400px;
+    border-radius: 15px;
+    border: 3px solid #ddd;
+}

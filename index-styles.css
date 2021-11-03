@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
+
+body{
+    background-image: url("bg_img.png");
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0;
+    margin-top: 30px;
+    overflow-x: hidden;
+}
+
+#nav_bar{
+    background-color: rgb(53, 53, 53);
+    font-size: 18px;
+    font-family: 'Noto Serif', serif;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
+
+#nav_bar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 45px;
+    text-decoration: none;
+    margin:5px;
+}
+
+#nav_bar a:hover {
+    font-weight: bold;
+    background: #ddd;
+    color: black;
+}
+
+#nav_login{
+    position: absolute;
+    right: 0%;
+}
+
+@keyframes plane_ani{
+    from{
+        left:-100px;
+    }
+    to{
+        left:100%;
+    }
+}
+
+@keyframes bigPlane{
+    from{
+        left:-1000px;
+    }
+    to{
+        left:20%;
+    }
+}
+
+#bigPlane{
+    position: absolute;
+    left:20%;
+    top:40%;
+    vertical-align: middle;
+    animation-name: bigPlane;
+    animation-timing-function: linear;
+    animation-duration: 10s;
+}

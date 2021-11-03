@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+    <head>
+        <title>Trip Master</title>
+        <link rel="stylesheet" href="trips-styles.css">
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="trips_script.js"></script>
+    </head>
+    <body>
+        <div id="nav_bar">
+            <a id="nav_home" class="nav_link" href="index.html">Home</a>
+            <a id="nav_trips" class="nav_link" href="trips.html">Trips</a>
+            <a id="nav_explore" class="nav_link" href="explore.html">Explore</a>
+            <a id="nav_login" class="nav_link" href="login.html">Login</a>
+        </div>
+        <br>
+        <br>
+        <div id="filter_main">
+            <div id="trips_title">Trips</div>
+            <div id="new_trip" >New Trip</div>
+        </div>
+        <div id='new_trip_body'>
+            <h1>New Trip</h1>
+            <form>
+                <label for='tripname'>Trip Name:</label><input type=text id='tripname' maxlength='10'><br>
+                <div id='map'></div>
+                <button>Create!</button>
+            </form>
+        </div>
+        <div id=trips_main></div>
+        
+
+        <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAde_34Uk0vjfHUNTR7aCR_CnvF0BSZBWo&callback=initMap">
+            </script>
+
+    </body>
+</html>
