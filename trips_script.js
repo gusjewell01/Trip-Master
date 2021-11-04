@@ -5,6 +5,8 @@ window.onload = function(){
         $("#new_trip_body").html();
     });
 
+    
+
 
 }
 
