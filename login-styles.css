@@ -91,11 +91,11 @@ body{
     background-color: rgb(53, 53, 53);
 }
 
-input, label{
+input, label, button{
     margin:5px;
 }
 
-#login_button{
+#login_button, #new_user_button{
     font-size: 26px;
     background-color: rgb(53, 53, 53);
     color:#ddd;
