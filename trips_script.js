@@ -4,8 +4,17 @@ window.onload = function(){
     $("#new_trip").click(function(){
         $("#new_trip_body").html();
     });
-
-    
+    $("#create").click(function() {
+        
+        let name = $("#tripname").val();
+        let destination = $("#tripDestination").val();
+        let budget = $("#budget").val();
+        let interests = $("#interest").val();
+        let start = $("#startDate").val();
+        let end = $("#endDate").val();
+        alert("Name: " + name +"\n" + "Destination: " + destination + "\n" + "Budget: " + budget + 
+        "\nInterests: " + interests +"\nStart Date: " + start + "\nEnd Date: " + end);
+    });
 
 
 }
