@@ -12,7 +12,7 @@ window.onload = function(){
         let interests = $("#interest").val();
         let start = $("#startDate").val();
         let end = $("#endDate").val();
-        alert("Name: " + name +"\n" + "Destination: " + destination + "\n" + "Budget: " + budget + 
+        alert("Trip Created!\nName: " + name +"\n" + "Destination: " + destination + "\n" + "Budget: " + budget + 
         "\nInterests: " + interests +"\nStart Date: " + start + "\nEnd Date: " + end);
     });
 
