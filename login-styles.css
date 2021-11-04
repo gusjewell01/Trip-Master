@@ -42,3 +42,61 @@ body{
     right: 0%;
 }
 
+
+#new_user_login_bar{
+    margin-top: 75px;
+    padding:10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(53, 53, 53);
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#login{
+    font-weight: bold;
+    grid-column: 1;
+    padding:15px;
+    margin:15px;
+    color:#ddd;
+}
+
+#new_user{
+    font-weight: bold;
+    grid-column: 2;
+    padding:15px;
+    margin:15px;
+    color:#ddd;
+}
+
+#login:hover{
+    background-color: #ddd;
+    color:rgb(53, 53, 53)
+}
+
+#new_user:hover{
+    background-color: #ddd;
+    color:rgb(53, 53, 53)
+}
+
+#content{
+    color: #ddd;
+    width:fit-content;
+    margin:15px;
+    margin-left: auto;
+    margin-right: auto;
+    padding:15px;
+    text-align: center;
+    background-color: rgb(53, 53, 53);
+}
+
+input, label{
+    margin:5px;
+}
+
+#login_button{
+    font-size: 26px;
+    background-color: rgb(53, 53, 53);
+    color:#ddd;
+}
