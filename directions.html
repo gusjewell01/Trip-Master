@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Trip Master Directions</title>
+    <script src="https://kit.fontawesome.com/6d64bbbc4b.js" crossorigin="anonymous"></script>
+    <link href="directions-styles.css" rel="stylesheet" />
+</head>
+<body>
+  
+
+
+        
+            <h1>Calculate Distance bw Origin and Destination</h1>
+            <p>Help show route for trip</p>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="from" class="col-xs-2 control-label"><i class="far fa-dot-circle"></i></label>
+                    <div class="col-xs-4">
+                        <input type="text" id="from" placeholder="Origin" class="form-control">
+                    </div>
+               </div>
+               <div class="form-group">
+                
+                    <label for="to" class="col-xs-2 control-label"><i class="fas fa-map-marker-alt"></i></label>
+                    <div class="col-xs-4">
+                        <input type="text" id="to" placeholder="Destination" class="form-control">
+                    </div>
+                  
+                 </div>
+                 
+            </form>
+
+            <div class="col-xs-offset-2 col-xs-10">
+                <button class="btn btn-info btn-lg " onclick="calcRoute();"><i class="fas fa-map-signs"></i></button>
+            </div>
+    
+       
+            <div id="googleMap">
+
+            </div>
+            <div id="output">
+
+            </div>
+     
+
+
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9N1a4Knte2eMJxIcafqnV442dDBBa9AU&libraries=places"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="Scripts/jquery-3.1.1.min.js"></script>
+    <script src="directions_script.js"></script>
+</body>
+</html>
