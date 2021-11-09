@@ -6,7 +6,7 @@ var mapOptions = {
 
 };
 
-var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
 var directionsService = new google.maps.DirectionsService();
 
@@ -16,7 +16,7 @@ directionsDisplay.setMap(map);
 
 
 function calcRoute() {
-    //create request
+    
     var request = {
         origin: document.getElementById("from").value,
         destination: document.getElementById("to").value,
@@ -36,7 +36,7 @@ function calcRoute() {
         } else {
             //delete route from map
             directionsDisplay.setDirections({ routes: [] });
-            //center map in charlotte
+            
             map.setCenter(myLatLng);
 
             output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
