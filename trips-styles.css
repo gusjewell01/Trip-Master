@@ -88,7 +88,7 @@ body{
     text-align: center;
 }
 
-label, input, button{
+label, input, button, select{
     margin:5px;
     padding:5px;
 }
