@@ -3,10 +3,9 @@
 <html lang='en'>
     <head>
         <title>Trip Master</title>
-        <link rel="stylesheet" href="trips-styles.css">
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
         <script src="https://kit.fontawesome.com/6d64bbbc4b.js" crossorigin="anonymous"></script>
-        <script type="text/javascript" src="trips_script.js"></script>
+        <link rel="stylesheet" href="trips-styles.css">
+        
     </head>
     <body>
         <div id="nav_bar">
@@ -24,10 +23,10 @@
         <div id='new_trip_body'>
             <h1>New Trip</h1>
             
-            <div id='map'></div>
-            <div id="output">
+            <div id="map"></div>
+            <!-- <div id="output">
 
-            </div>
+            </div> -->
             <div class='column-right'>
                 <form>
                     <label for='tripname'>Trip Name:</label><input type=text id='tripname' maxlength='10'><br>
@@ -37,7 +36,7 @@
                     <input type="text" id="from" placeholder="Origin" class="form-control">
                     <label for="to"><i class="fas fa-map-marker-alt"></i></label>
                     <input type="text" id="to" placeholder="Destination" class="form-control">
-                    <button id = "distance" onclick="calcRoute();"><i class="fas fa-map-signs"></i></button>
+                    
                     <br>
                 <label>Budget</label>
                 <input type = "number" id='minBudget' placeholder = 'Min'> <input type = "number" id='maxBudget' placeholder="Max">
@@ -59,8 +58,14 @@
                 </div>
                 <br>
                 
-                    <button id = "create">Create!</button>
+                    
                 </form>
+                <button class="btn btn-info btn-lg " onclick="calcRoute();"><i class="fas fa-map-signs"></i></button>
+                <br>
+                <button id = "create">Create!</button>
+                <div id="output">
+
+                </div>
             </div>
             
         </div>
@@ -70,8 +75,11 @@
         <!-- <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAde_34Uk0vjfHUNTR7aCR_CnvF0BSZBWo&callback=initMap">
             </script> -->
+            
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9N1a4Knte2eMJxIcafqnV442dDBBa9AU&libraries=places"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+            <script src="trips_script.js"></script>
 
     </body>
 </html>

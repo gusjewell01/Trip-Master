@@ -49,7 +49,7 @@ function calcRoute() {
 
 //create autocomplete objects for inputs
 var options = {
-    types: ['(cities)']
+    // types: ['(cities)']
 }
 
 var input1 = document.getElementById("from");
