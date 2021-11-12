@@ -1,5 +1,8 @@
 
 
+    $("#new_trip").click(function(){
+        $("#new_trip_body").html();
+    });
     
     $("#create").click(function() {
         
