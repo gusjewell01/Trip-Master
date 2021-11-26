@@ -13,6 +13,7 @@
             <a id="nav_trips" class="nav_link" href="trips.html">Trips</a>
             <a id="nav_explore" class="nav_link" href="explore.html">Explore</a>
             <a id="nav_login" class="nav_link" href="login.html">Login</a>
+            
         </div>
         <br>
         <br>
@@ -42,7 +43,7 @@
                 <input type = "number" id='minBudget' placeholder = 'Min'> <input type = "number" id='maxBudget' placeholder="Max">
                 <br>
                 <label>Interests</label>
-                <select name = "interests">
+                <select name = "interests" id ="ints">
                     <option value = "SightSeeing">Sight Seeing</option>
                     <option value = "Food">Food</option>
                     <option value = "NightLife">Night Life</option>
@@ -66,6 +67,16 @@
                 <div id="output">
 
                 </div>
+
+                
+                <br>
+                <br>
+                <label for='stop'><i class='fas fa-map-marker-alt'></i></label><input type='text' id='stop' placeholder='Add Stop' class='form-control'></input>
+                <button class="btn btn-info btn-lg " onclick="addStop();"><i class="fas fa-map-signs"></i></button>
+                <input type='text' id='userInfo' placeholder='Add User (email)' class='form-control'></input><button id = "addUser">Add</button>
+                <div id = 'tripOutput'></div>
+
+
             </div>
             
         </div>
