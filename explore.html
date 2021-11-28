@@ -4,7 +4,8 @@
     <head>
         <title>Trip Master</title>
         <link rel="stylesheet" href="explore-styles.css">
-        <script type="text/javascript" src="script.js"></script>
+        <script src="https://kit.fontawesome.com/6d64bbbc4b.js" crossorigin="anonymous"></script>
+
     </head>
     <body>
         <div id="nav_bar">
@@ -13,6 +14,33 @@
             <a id="nav_explore" class="nav_link" href="explore.html">Explore</a>
             <a id="nav_login" class="nav_link" href="login.html">Login</a>
         </div>
+        <br>
+        <br>
+        <div id = "main">
+            <div id="map"></div>
+            <br>
+            <a>Cities: </a>
+            <input type="text" id="city" placeholder="Search Nearby" class="form-control">
+            <button class="btn btn-info btn-lg " onclick="calcRouteCity();"><i class="fas fa-map-marker-alt"></i></button>
+
+            <a>Restaurants:   </a>
+            <input type="text" id="rest" placeholder="Search Nearby" class="form-control">
+            <button class="btn btn-info btn-lg " onclick="calcRouteRest();"><i class="fas fa-map-marker-alt"></i></button>
+
+            <a>Establishments:   </a>
+            <input type="text" id="est" placeholder="Search Nearby" class="form-control">
+            <button class="btn btn-info btn-lg " onclick="calcRouteEst();"><i class="fas fa-map-marker-alt"></i></button>
+
+            <a>Gas:   </a>
+            <input type="text" id="gas" placeholder="Search Nearby" class="form-control">
+            <button class="btn btn-info btn-lg " onclick="calcRouteGas();"><i class="fas fa-map-marker-alt"></i></button>
+
+            
+        </div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB9N1a4Knte2eMJxIcafqnV442dDBBa9AU&libraries=places"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="explore_script.js"></script>
 
     </body>
 </html>

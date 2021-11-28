@@ -42,3 +42,32 @@ body{
     right: 0%;
 }
 
+#main{
+    background-color: rgb(53, 53, 53);
+    width:80%;
+    height: 800px;
+    margin-top:30px;
+    margin-left: auto;
+    margin-right: auto;
+    color:#ddd;
+    padding: 15px;
+    text-align: center;
+}
+
+#map{
+    height: 700px;
+    width: 100%;
+    float: left;
+    border-radius: 15px;
+    border: 3px solid #ddd;
+}
+
+#main .column_right{
+    height: fit-content;
+    width: 48%;
+    float: right;
+    border-radius: 15px;
+    border: 3px solid #ddd;
+    margin-bottom: 20px;
+    text-align: left;
+}
