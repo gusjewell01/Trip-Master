@@ -28,8 +28,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
     
-                // const output = document.querySelector('#tripOutput');
-                // output.innerHTML = "<br><div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
     
                 //display route
                 directionsDisplay.setDirections(result);
@@ -39,7 +37,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
                 
                 map.setCenter(myLatLng);
     
-                // output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
             }
         });
     
@@ -58,9 +55,7 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
     
-                // const output = document.querySelector('#tripOutput');
-                // output.innerHTML = "<br><div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-    
+                
                 //display route
                 directionsDisplay.setDirections(result);
             } else {
@@ -69,7 +64,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
                 
                 map.setCenter(myLatLng);
     
-                // output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
             }
         });
     
@@ -88,8 +82,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
     
-                // const output = document.querySelector('#tripOutput');
-                // output.innerHTML = "<br><div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
     
                 //display route
                 directionsDisplay.setDirections(result);
@@ -99,7 +91,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
                 
                 map.setCenter(myLatLng);
     
-                // output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
             }
         });
     
@@ -118,8 +109,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
         directionsService.route(request, function (result, status) {
             if (status == google.maps.DirectionsStatus.OK) {
     
-                // const output = document.querySelector('#tripOutput');
-                // output.innerHTML = "<br><div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
     
                 //display route
                 directionsDisplay.setDirections(result);
@@ -129,7 +118,6 @@ var myLatLng = { lat: 35.397, lng: -80.844 };
                 
                 map.setCenter(myLatLng);
     
-                // output.innerHTML = "<div class='alert-danger'><i class='fas fa-exclamation-triangle'></i> Could not retrieve driving distance.</div>";
             }
         });
     
