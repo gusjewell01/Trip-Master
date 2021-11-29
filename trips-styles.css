@@ -103,7 +103,6 @@ button:hover{
     background-color:#ddd;
     color:rgb(53, 53, 53);
 }
-
 #new_trip_body #map{
     height: 400px;
     width: 48%;
@@ -111,7 +110,6 @@ button:hover{
     border-radius: 15px;
     border: 3px solid #ddd;
 }
-
 #new_trip_body .column_right{
     height: fit-content;
     width: 48%;
@@ -120,16 +118,4 @@ button:hover{
     border: 3px solid #ddd;
     margin-bottom: 20px;
     text-align: left;
-}
-
-#tripOutput {
-    background-color: rgb(53, 53, 53);
-    width:80%;
-    height: 200px;
-    margin-top:30px;
-    margin-left: auto;
-    margin-right: auto;
-    color:#ddd;
-    padding: 15px;
-    text-align: center;
 }

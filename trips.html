@@ -13,7 +13,6 @@
             <a id="nav_trips" class="nav_link" href="trips.html">Trips</a>
             <a id="nav_explore" class="nav_link" href="explore.html">Explore</a>
             <a id="nav_login" class="nav_link" href="login.html">Login</a>
-            
         </div>
         <br>
         <br>
@@ -43,7 +42,7 @@
                 <input type = "number" id='minBudget' placeholder = 'Min'> <input type = "number" id='maxBudget' placeholder="Max">
                 <br>
                 <label>Interests</label>
-                <select name = "interests" id ="ints">
+                <select name = "interests">
                     <option value = "SightSeeing">Sight Seeing</option>
                     <option value = "Food">Food</option>
                     <option value = "NightLife">Night Life</option>
@@ -67,22 +66,49 @@
                 <div id="output">
 
                 </div>
-
-                
-                <br>
-                <br>
-                <label for='stop'><i class='fas fa-map-marker-alt'></i></label><input type='text' id='stop' placeholder='Add Stop' class='form-control'></input>
-                <button class="btn btn-info btn-lg " onclick="addStop();"><i class="fas fa-map-signs"></i></button>
-                <input type='text' id='userInfo' placeholder='Add User (email)' class='form-control'></input><button id = "addUser">Add</button>
-                <div id = 'tripOutput'></div>
-
-
             </div>
             
         </div>
-        <div id=trips_main></div>
+        <!-- <div id=trips_main></div> -->
         
+        <div id= "trip_members_container" style="display: none;">
+            <div id="trip_members_header">
+                Add Trip Members
+            </div>
+            
+            <div id="trip_members_body">
+                <form>
+                    <label for="member_name">Member Name</label>
+                    <input type="text" placeholder="Enter Name" id="memberName"/>
+                </form>
+                <button onclick="addMember()">Add Member</button>
+            </div>
+            
+        </div>
 
+        <div id="budget_split_container" style="display: none;">
+            <div id="budget_split_header">
+                Split Budget
+            </div>
+            <div id="budget_split_body">
+                <div>
+                    <span>Min Budget:</span> <span id="min"></span>
+                    <span>Max Budget:</span> <span id="max"></span>
+                    <span><button onclick="split()">Split</button></span>
+                </div>
+                
+                <table id="memberTable">
+                    <thead>
+                        <th>Member Name</th>
+                        <th>Min Share</th>
+                        <th> Max Share</th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <!-- <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAde_34Uk0vjfHUNTR7aCR_CnvF0BSZBWo&callback=initMap">
             </script> -->
