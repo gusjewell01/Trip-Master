@@ -7,6 +7,13 @@
 
     let trips = [];
 
+    function event(name, start, end, loc, desc) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+        this.loc = loc;
+        this.desc = desc;
+    }
     var tripCreated = false;
     function Trip(user, name, origin, destination, minBudget, maxBudget, interests, start, end) {
         this.user = user;
@@ -21,6 +28,11 @@
         this.start = start;
         this.end = end;
         this.stops = [origin];
+        this.events = [];
+
+        this.addEvent = function(event) {
+            this.events.push(event);
+        }
 
         this.addStop = function(stop) {
             this.stops.push(stop);
@@ -173,7 +185,7 @@
         if (tripCreated) {
         stopCounter = stopCounter + 1;
         trips[0].addStop(document.getElementById("stop").value);
-
+    
         var request = {
             origin: trips[0].getStops()[stopCounter-1],
             destination: trips[0].getStops()[stopCounter],
@@ -201,6 +213,12 @@
     } else 
     alert("No Active Trip!");
         
+    }
+
+    function addEvent() {
+        if (tripCreated) {
+            
+        }
     }
     function addMember(){
         trips[0].addUser(document.getElementById("memberName").value);
