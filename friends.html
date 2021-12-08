@@ -5,7 +5,7 @@
         <title>Trip Master</title>
         <link rel="stylesheet" href="friends-styles.css">
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script type="text/javascript" src="friends_script.js"></script>
+        <script src="friends_scripts.js"></script>
     </head>
     <body>
         <div id="nav_bar">
@@ -16,15 +16,13 @@
             <a id="nav_login" class="nav_link" href="login.html">Login</a>
         </div>
 
-        <div>
-            <p>Friends:</p>
-            <ul class="no-bullets">
-              <li>Angela Martin</li>
-              <li>Blake Johnson</li>
-              <li>Dwight Schrute</li>
-              <li>Jim Halpert</li>
-              <li>Pam Beasley</li>
-            </ul>
+        <div id='friends_main'>
+            <div id='new_friends'>
+                <input type='text' id='new_friend'>
+                <button id='add_friend'>Add</button>
+            </div>
+            <div id='friends'></div>
+            
 
         </div>
 

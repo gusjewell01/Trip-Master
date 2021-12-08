@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
 body{
-    background-image: url("bg_img.png");
+    background: linear-gradient(to left top, blue, red) fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -9,6 +9,7 @@ body{
     margin: 0;
     margin-top: 30px;
     overflow-x: hidden;
+    min-height: auto;
 }
 
 #nav_bar{

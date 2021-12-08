@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
 body{
-    background-image: url("bg.png");
+    background: linear-gradient(to left top, blue, red) fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -44,14 +44,16 @@ body{
 
 
 #new_user_login_bar{
-    margin-top: 75px;
+    margin-top: 90px;
     padding:10px;
-    width: fit-content;
+    width: 40%;
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(53, 53, 53);
     display: grid;
     grid-template-columns: auto auto;
+    font-size: 30px;
+    text-align: center;
 }
 
 #login{
@@ -60,6 +62,12 @@ body{
     padding:15px;
     margin:15px;
     color:#ddd;
+    
+}
+
+#login:hover{
+    border: solid 3px white;
+    margin: 12px;
 }
 
 #new_user{
@@ -68,6 +76,11 @@ body{
     padding:15px;
     margin:15px;
     color:#ddd;
+}
+
+#new_user:hover{
+    border: solid 3px white;
+    margin: 12px;
 }
 
 #login:hover{
@@ -93,6 +106,8 @@ body{
 
 input, label, button{
     margin:5px;
+    padding: 5px;
+    font-size: 25px;
 }
 
 #login_button, #new_user_button{

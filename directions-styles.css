@@ -1,4 +1,6 @@
-
+body{
+  background: linear-gradient(to left top, blue, red) fixed;
+}
 
 #map {
   width: 80%;

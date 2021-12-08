@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
 body{
-    background-image: url("bg.png");
+    background: linear-gradient(to left top, blue, red) fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -42,8 +42,56 @@ body{
     right: 0%;
     }
 
-#ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
+#friends_main{
+    margin:90px auto 0px auto;
+    width: 40%;
+    text-align: center;
+    background-color: rgb(53, 53, 53);
+    padding: 15px;
+    
+    
+}
+
+#new_friends{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    
+}
+
+#new_friend{
+    margin-left:10px;
+    margin-right: 10px;
+    font-size: 35px;
+}
+
+#add_friend{
+    font-size: 35px;
+}  
+
+#friends{
+    margin:10px;
+    color: white;
+    font-size: 25px;
+}
+
+.friend{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    border: solid white 3px;
+    margin: 5px;
+}
+
+.info{
+    display: grid;
+    grid-template-rows: 60% 40%;
+}
+
+h1, h2{
+    padding: 3px;
+    margin: 3px;
+}
+
+.remove_button{
+    background-color: red;
+    margin: 40% 20% 40% 20%;
 }
