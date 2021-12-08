@@ -7,7 +7,8 @@
 
     let trips = [];
 
-    function event(name, start, end, loc, desc) {
+    function Event(date, name, start, end, loc, desc) {
+        this.date = date;
         this.name = name;
         this.start = start;
         this.end = end;
@@ -115,6 +116,44 @@
         alert("No Active Trip!");
     });
 
+    $("#addEvent").click(function() {
+        if (tripCreated) {
+
+            var eventConflict = false;
+            let eventDate = $("#eventDate").val();
+            let eventName = $("#eventName").val();
+            let startTime = $("#startTime").val();
+            let endTime = $("#endTime").val();
+            let eventLoc = $("#eventLoc").val();
+            let eventDesc = $("#eventDesc").val();
+            
+            for (let i = 0; i < trips[0].events.length; i++) {
+
+                if (trips[0].events[i].name == eventName) {
+                    alert("Conflict with event " + trips[0].events[i].name);
+                    eventConflict = true;
+                    break;
+                }
+                
+                if (trips[0].events[i].start == startTime && trips[0].events[i].date == eventDate) {
+                    alert("Conflict with event " + trips[0].events[i].name + " on " + trips[0].events[i].date + " at time " + trips[0].events[i].start);
+                    eventConflict = true;
+                    break;
+                }
+                if (trips[0].events[i].end == endTime && trips[0].events[i].date == eventDate) {
+                    alert("Conflict with event " + trips[0].events[i].name + " on " + trips[0].events[i].date + " at time " + trips[0].events[i].end);
+                    eventConflict = true;
+                    break;
+                }
+                
+            }
+            if (!eventConflict) {
+                trips[0].addEvent(new Event(eventDate, eventName, startTime, endTime, eventLoc, eventDesc));
+            }
+        } else
+        alert("No Active Trip!");
+    });
+
 
     var myLatLng = { lat: 35.397, lng: -80.844 };
     var mapOptions = {
@@ -215,11 +254,7 @@
         
     }
 
-    function addEvent() {
-        if (tripCreated) {
-            
-        }
-    }
+    
     function addMember(){
         trips[0].addUser(document.getElementById("memberName").value);
         document.getElementById("budget_split_container").style.display = "block";
