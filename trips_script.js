@@ -11,6 +11,8 @@
     }
 
     let trips = [];
+    let distances = [];
+    let durations = [];
 
     function Event(date, name, start, end, loc, desc) {
         this.date = date;
@@ -36,6 +38,7 @@
         this.end = end;
         this.stops = [origin];
         this.events = [];
+    
 
         this.addEvent = function(event) {
             this.events.push(event);
@@ -116,7 +119,8 @@
     
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-    
+                distances.push(result.routes[0].legs[0].distance.text);
+                durations.push(result.routes[0].legs[0].duration.text);
                 //display route
                 directionsDisplay.setDirections(result);
             } else {
@@ -156,11 +160,11 @@
 
 
     let stopCounter = 0;
-
-    function addStop() {
+    function calcStop() {
         if (tripCreated) {
         stopCounter = stopCounter + 1;
         trips[0].addStop(document.getElementById("stop").value);
+
         var request = {
             origin: trips[0].getStops()[stopCounter-1],
             destination: trips[0].getStops()[stopCounter],
@@ -173,9 +177,13 @@
     
                 const output = document.querySelector('#output');
                 output.innerHTML = "<br><div class='alert-info'>From: " + trips[0].getStops()[stopCounter-1] + ".<br />To: " + trips[0].getStops()[stopCounter] + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-    
+                distances.push(result.routes[0].legs[0].distance.text);
+                durations.push(result.routes[0].legs[0].duration.text);
                 //display route
                 directionsDisplay.setDirections(result);
+                
+                
+                
             } else {
                 //delete route from map
                 directionsDisplay.setDirections({ routes: [] });
@@ -187,10 +195,18 @@
         });
 
 
+        
+
+    } else 
+    alert("No Active Trip!");
+        
+    }
+
+    function addStop() {
         document.getElementById("stop_list_container").style.display = "block";
-        var rowCount = trips[0].stops.length;        
+        var rowCount = trips[0].stops.length; 
         var table = document.getElementById("stopTable");     
-        var tbody = table.lastElementChild;  
+        var tbody = table.lastElementChild; 
         var row = tbody.insertRow(rowCount - 1);
         
         var cell1 = row.insertCell(0);
@@ -199,18 +215,11 @@
         var cell4 = row.insertCell(3);
 
         
-        for (let i = 0; i <=rowCount; i++ ) {
-        cell1.innerHTML = i + 1;
-        cell2.innerHTML = trips[0].stops[i];
-        cell3.innerHTML = result.routes[0].legs[0].distance.text;
-        cell4.innerHTML = result.routes[0].legs[0].duration.text;
         
-        }
-        
-
-    } else 
-    alert("No Active Trip!");
-        
+        cell1.innerHTML = rowCount;
+        cell2.innerHTML = trips[0].stops[rowCount -1];
+        cell3.innerHTML = distances[rowCount -1];
+        cell4.innerHTML = durations[rowCount -1];
     }
     function addEvent() {
             if (tripCreated) {
@@ -288,7 +297,7 @@
         }
         if (nameFound) {
             trips[0].events.splice(index, 1);
-            addEvent();
+            
             
         }
         else {
