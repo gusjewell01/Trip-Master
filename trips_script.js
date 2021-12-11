@@ -23,6 +23,8 @@
         this.desc = desc;
     }
 
+    
+
     var tripCreated = false;
     function Trip(user, name, origin, destination, minBudget, maxBudget, interests, start, end) {
         this.user = user;
@@ -137,6 +139,7 @@
     
     var members = [];
     var contact = [];
+    var owes = [];
     var options = {
         //optional constraints on autocomplete
         // types: ['(cities)']
@@ -307,11 +310,10 @@
 
     function addMember(){
         document.getElementById("budget_split_container").style.display = "block";
-        trips[0].addUser(document.getElementById("memberName").value);
-        trips[0].addUserEmail(document.getElementById("email").value);
-
+        document.getElementById("trip_expense_container").style.display = "block";
         members.push(document.getElementById("memberName").value);
         contact.push(document.getElementById("contact").value)
+        owes.push(0);
         
         var rowCount = members.length;        
         var table = document.getElementById("memberTable");        
@@ -321,12 +323,19 @@
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         row.insertCell(2);
-        row.insertCell(3);
         cell1.innerHTML = members[rowCount - 1];
         cell2.innerHTML = contact[rowCount - 1];
         
         document.getElementById("max").innerHTML = "Max Budget:"+max;
         document.getElementById("min").innerHTML = "Min Budget:"+min;
+
+        var txt2 = $("<li><input type=checkbox class=member /> <label name=memberName> </label></li>");
+            $("#memberList").append(txt2);
+
+            document.getElementsByClassName("member")[rowCount - 1].setAttribute("value", rowCount - 1);
+            var nlabel = document.getElementsByName("memberName");
+            nlabel[rowCount - 1].textContent = members[rowCount - 1];
+
     }
 
     function split(){
@@ -339,5 +348,32 @@
         for(let i = 1; i<= length; i++ ){
             table.rows[i].cells[2].innerHTML = minValue;
             table.rows[i].cells[3].innerHTML = maxValue;
+        }
+    }
+
+    var expenditure;
+    function addExpense(){
+        var n = 0;
+        expenditure = document.getElementById("expend").value;
+        var exName = $("#exName").val();
+       
+        alert("Expense Created!\nName: " + exName +"\nExpenditure: " + expenditure );
+        var e = document.getElementsByClassName("member");
+        for(var checked of e){
+            if(checked.checked){
+                n++;
+            }   
+        }
+
+        for(var checked of e){
+            if(checked.checked){
+                owes[checked.value] += (expenditure / n);                
+            }   
+        }
+       
+        var table = document.getElementById("memberTable");
+        let length = members.length;
+        for(let i = 1; i<= length; i++ ){
+            table.rows[i].cells[2].innerHTML = owes[i - 1];
         }
     }

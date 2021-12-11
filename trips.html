@@ -91,6 +91,27 @@
             
         </div>
 
+        <div id= "trip_expense_container" style="display: none;">
+            <div id="trip_expense_header" class="container-header">
+                Add Expense
+            </div>
+            
+            <div id="trip_expense_body">
+                <form class="form-control">
+                    <label for="member_name">Title: </label>
+                    <input type="text" placeholder="Enter Name" id="exName"/>
+                    <label>Expenditure: </label>
+                    <input type="number" placeholder="Total Spent" id="expend" />
+
+                    <ul id="memberList" style="list-style: none;">
+                        <label>Add Members:</label>
+                    </ul>
+                </form>
+                <button onclick="addExpense()">Add Expense</button>
+            </div>
+            
+        </div>
+
         <div id="budget_split_container" style="display: none;">
             <div id="budget_split_header">
                 Split Budget
