@@ -4,6 +4,7 @@
         $("#new_trip_body").html();
     });
     
+
     var dropdown;
     function getDropValue(event){
         dropdown = event.target.value;
@@ -259,35 +260,20 @@
                     trips[0].addEvent(new Event(eventDate, eventName, startTime, endTime, eventLoc, eventDesc));
                     document.getElementById("event_list_container").style.display = "block";
 
-                    var rowCount = trips[0].events.length;        
-                    var table = document.getElementById("eventTable");        
-                    var tbody = table.lastElementChild;        
-                    var row = tbody.insertRow(rowCount - 1);
+                    $(".data-table tbody").append("<tr data-date='"+eventDate+"' data-name='"+eventName+ "' data-start='"+startTime+  "' data-end='"+endTime+ "' data-loc='"+eventLoc+ "' data-desc='"+eventDesc+
+                    "'><td>"+eventDate+"</td><td>"+eventName+"</td><td>"+startTime+"</td><td>"+endTime+"</td><td>"+eventLoc+"</td><td>"+eventDesc+
+                    "</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type ='button'>Edit</button></td></tr>");
 
-                    var cell1 = row.insertCell(0);
-                    var cell2 = row.insertCell(1);
-                    var cell3 = row.insertCell(2);
-                    var cell4 = row.insertCell(3);
-                    var cell5 = row.insertCell(4);
-                    var cell6 = row.insertCell(5);
+                    $("input[eventName='']").val("");
                     
-                    for (let i = 0; i <=rowCount; i++ ) {
-                    cell1.innerHTML = trips[0].events[i].date;
-                    cell2.innerHTML = trips[0].events[i].name;
-                    cell3.innerHTML = trips[0].events[i].start;
-                    cell4.innerHTML = trips[0].events[i].end;
-                    cell5.innerHTML = trips[0].events[i].loc;
-                    cell6.innerHTML = trips[0].events[i].desc;
-                    }
                 }
             } else
             alert("No Active Trip!");
         
     }
 
-    function deleteEvent() {
-        let eventToDel = document.getElementById("nameToRemove").value;
-        
+    $('body').on('click', '.btn-delete', function() {
+        let eventToDel = $(this).parents('tr').attr('data-name');
         var nameFound = false;
         let index = 0;
         for (let i = 0; i<= trips[0].events.length; i++) {
@@ -306,7 +292,89 @@
         else {
             alert("Event not found!");
         }
-    }
+        $(this).parents('tr').remove();
+        
+    });
+
+    $('body').on('click', '.btn-edit', function() {
+        var date =$(this).parents('tr').attr('data-date');
+        var name =$(this).parents('tr').attr('data-name');
+        var start =$(this).parents('tr').attr('data-start');
+        var end =$(this).parents('tr').attr('data-end');
+        var loc =$(this).parents('tr').attr('data-loc');
+        var desc =$(this).parents('tr').attr('data-desc');
+
+        $(this).parents('tr').find('td:eq(0)').html("<input type ='date' name='edit_date' value='"+date+"'>");
+        $(this).parents('tr').find('td:eq(1)').html("<input type ='text' name='edit_name' value='"+name+"'>");
+        $(this).parents('tr').find('td:eq(2)').html("<input type ='text' name='edit_start' value='"+start+"'>");
+        $(this).parents('tr').find('td:eq(3)').html("<input type ='text' name='edit_end' value='"+end+"'>");
+        $(this).parents('tr').find('td:eq(4)').html("<input type ='text' id = 'edit_loc' name='edit_loc' value='"+loc+"'>");
+        $(this).parents('tr').find('td:eq(5)').html("<input type ='text' name='edit_desc' value='"+desc+"'>");
+
+        $(this).parents('tr').find('td:eq(6)').prepend("<button type='button' class ='btn btn-info btn-update mr-3'>Update</button>");  
+        $(this).hide()
+
+        var input5 = document.getElementById("edit_loc"); 
+        var autocomplete5 = new google.maps.places.Autocomplete(input5, eventOptions);
+    });
+
+    $('body').on('click', '.btn-update',function(){
+        var date=$(this).parents('tr').find("input[name='edit_date']").val();
+        var name=$(this).parents('tr').find("input[name='edit_name']").val();
+        var start=$(this).parents('tr').find("input[name='edit_start']").val();
+        var end=$(this).parents('tr').find("input[name='edit_end']").val();
+        var loc=$(this).parents('tr').find("input[name='edit_loc']").val();
+        var desc=$(this).parents('tr').find("input[name='edit_desc']").val();
+
+        let nameToEdit = $(this).parents('tr').attr('data-name');
+        let descToEdit = $(this).parents('tr').attr('data-desc');
+        var nameFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].events.length; i++) {
+            if (trips[0].events[i].name == nameToEdit || trips[0].events[i].desc == descToEdit) {
+                
+                index = i;
+                nameFound = true;
+                break;
+            }
+        }
+
+        $(this).parents('tr').find('td:eq(0)').text(date);
+        $(this).parents('tr').find('td:eq(1)').text(name);
+        $(this).parents('tr').find('td:eq(2)').text(start);
+        $(this).parents('tr').find('td:eq(3)').text(end);
+        $(this).parents('tr').find('td:eq(4)').text(loc);
+        $(this).parents('tr').find('td:eq(5)').text(desc);
+
+        $(this).parents('tr').attr('data-date', date);
+        $(this).parents('tr').attr('data-name', name);
+        $(this).parents('tr').attr('data-start', start);
+        $(this).parents('tr').attr('data-end', end);
+        $(this).parents('tr').attr('data-loc', loc);
+        $(this).parents('tr').attr('data-desc', desc);
+
+    
+        if (nameFound) {
+            trips[0].events[index].name = name;
+            trips[0].events[index].date = date;
+            trips[0].events[index].start = start;
+            trips[0].events[index].end = end;
+            trips[0].events[index].loc = loc;
+            trips[0].events[index].desc = desc;
+            
+        }
+        
+        else {
+            alert("Event not found!");
+        }
+        
+
+
+        $(this).parents('tr').find('.btn-edit').show();
+        $(this).parents('tr').find('.btn-update').remove();
+    });
+
+    
 
     function addMember(){
         document.getElementById("budget_split_container").style.display = "block";

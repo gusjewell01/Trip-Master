@@ -202,7 +202,7 @@
 
             </div>
         </div>
-
+        
 
         <div id="event_list_container" style="display: none;">
             <div id="event_list_header">
@@ -210,20 +210,19 @@
             </div>
             <div id="event_list_body">
                 <div class="event_display">
-                    <span id="min" style="padding: 24px 0px;"></span>
-                    <span id="max" style="padding: 24px 0px;"></span>
-                    <span><input type="text" id="nameToRemove" placeholder="Event Name"><button onclick="deleteEvent()">Delete</button></span>
+                    <!-- <span><input type="text" id="nameToRemove" placeholder="Event Name"><button onclick="deleteEvent()">Delete</button></span> -->
                 </div>
                 
                 <div class="eventTable">
-                    <table id="eventTable">
+                    <table id="eventTable" class = "table table-bordered data-table">
                         <thead style="text-align: center;">
-                            <th style="width: 16.666%;">Date</th>
-                            <th style="width: 16.666%;">Name</th>
-                            <th style="width: 16.666%;">Start</th>
-                            <th style="width: 16.666%;">End</th>
-                            <th style="width: 16.666%;">Location</th>
-                            <th style="width: 16.666%;">Description</th>
+                            <th style="width: 12%;">Date</th>
+                            <th style="width: 12%;">Name</th>
+                            <th style="width: 10%;">Start</th>
+                            <th style="width: 10%;">End</th>
+                            <th style="width: 16%;">Location</th>
+                            <th style="width: 16%;">Description</th>
+                            <th style="width: 24%;">Action</th>
                         </thead>
                         <tbody>
     
@@ -232,8 +231,8 @@
                 </div>
             </div>
         </div>
-
-
+        
+        <div className></div>
         <!-- <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAde_34Uk0vjfHUNTR7aCR_CnvF0BSZBWo&callback=initMap">
             </script> -->
@@ -242,6 +241,7 @@
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
             <script src="trips_script.js"></script>
+            <script src = "eventTable.js"></script>
 
     </body>
 </html>
