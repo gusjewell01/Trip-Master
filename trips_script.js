@@ -12,8 +12,6 @@
     }
 
     let trips = [];
-    let distances = [];
-    let durations = [];
 
     function Event(date, name, start, end, loc, desc) {
         this.date = date;
@@ -22,6 +20,13 @@
         this.end = end;
         this.loc = loc;
         this.desc = desc;
+    }
+
+    function Stop(number, name, distance, duration) {
+        this.number = number;
+        this.name = name;
+        this.distance = distance;
+        this.duration = duration;
     }
 
     
@@ -39,16 +44,19 @@
         this.interests = interests;
         this.start = start;
         this.end = end;
-        this.stops = [origin];
+        this.stopNames = [origin];
+        this.stops = [];
         this.events = [];
+        this.distances = [];
+        this.durations = [];
     
 
         this.addEvent = function(event) {
             this.events.push(event);
         }
 
-        this.addStop = function(stop) {
-            this.stops.push(stop);
+        this.addStopName = function(stop) {
+            this.stopNames.push(stop);
         }
 
         this.addUser = function(newUser) {
@@ -59,8 +67,8 @@
             this.userEmails.push(newUserEmail);
         }
 
-        this.getStops = function() {
-            return this.stops;
+        this.getStopNames = function() {
+            return this.stopNames;
         }
     }
     var max, min;
@@ -122,8 +130,8 @@
     
                 const output = document.querySelector('#output');
                 output.innerHTML = "<div class='alert-info'>From: " + document.getElementById("from").value + ".<br />To: " + document.getElementById("to").value + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-                distances.push(result.routes[0].legs[0].distance.text);
-                durations.push(result.routes[0].legs[0].duration.text);
+                // trips[0].distances.push(result.routes[0].legs[0].distance.text);
+                // trips[0].durations.push(result.routes[0].legs[0].duration.text);
                 //display route
                 directionsDisplay.setDirections(result);
             } else {
@@ -136,7 +144,9 @@
             }
         });
     
-    }    
+    }
+    
+    
     
     var members = [];
     var contact = [];
@@ -167,11 +177,11 @@
     function calcStop() {
         if (tripCreated) {
         stopCounter = stopCounter + 1;
-        trips[0].addStop(document.getElementById("stop").value);
+        trips[0].addStopName(document.getElementById("stop").value);
 
         var request = {
-            origin: trips[0].getStops()[stopCounter-1],
-            destination: trips[0].getStops()[stopCounter],
+            origin: trips[0].getStopNames()[stopCounter-1],
+            destination: trips[0].getStopNames()[stopCounter],
             travelMode: google.maps.TravelMode.DRIVING, //WALKING, BYCYCLING, TRANSIT
             unitSystem: google.maps.UnitSystem.IMPERIAL
         }
@@ -180,9 +190,12 @@
             if (status == google.maps.DirectionsStatus.OK) {
     
                 const output = document.querySelector('#output');
-                output.innerHTML = "<br><div class='alert-info'>From: " + trips[0].getStops()[stopCounter-1] + ".<br />To: " + trips[0].getStops()[stopCounter] + ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text + ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
-                distances.push(result.routes[0].legs[0].distance.text);
-                durations.push(result.routes[0].legs[0].duration.text);
+                output.innerHTML = "<br><div class='alert-info'>From: " + trips[0].getStopNames()[stopCounter-1] + ".<br />To: " + trips[0].getStopNames()[stopCounter] +
+                 ".<br /> Driving distance <i class='fas fa-road'></i> : " + result.routes[0].legs[0].distance.text +
+                  ".<br />Duration <i class='fas fa-hourglass-start'></i> : " + result.routes[0].legs[0].duration.text + ".</div>";
+                trips[0].distances.push(result.routes[0].legs[0].distance.text);
+                trips[0].durations.push(result.routes[0].legs[0].duration.text);
+                
                 //display route
                 directionsDisplay.setDirections(result);
                 
@@ -208,23 +221,64 @@
 
     function addStop() {
         document.getElementById("stop_list_container").style.display = "block";
-        var rowCount = trips[0].stops.length; 
-        var table = document.getElementById("stopTable");     
-        var tbody = table.lastElementChild; 
-        var row = tbody.insertRow(rowCount - 1);
+        var newStop = new Stop(stopCounter, trips[0].getStopNames()[stopCounter], trips[0].distances[stopCounter-1], trips[0].durations[stopCounter-1]);
+        trips[0].stops.push(newStop);
+        let stopNumber = trips[0].stops[stopCounter-1].number;
+        let stopName = trips[0].stops[stopCounter-1].name;
+        let stopDistance = trips[0].stops[stopCounter-1].distance;
+        let stopDuration = trips[0].stops[stopCounter-1].duration;
+
+
         
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        var cell3 = row.insertCell(2);
-        var cell4 = row.insertCell(3);
+
+        $(".stop-table tbody").append("<tr stop-num='"+stopNumber+"' stop-name='"+stopName+ "' stop-dist='"+stopDistance+  "' stop-dur='"+stopDuration+ 
+        "'><td>"+stopNumber+"</td><td>"+stopName+"</td><td>"+stopDistance+"</td><td>"+stopDuration+
+        "</td><td><button class='btn btn-danger btn-lg btn-stop-delete mr-3' type ='button'>Delete</button></td></tr>");
+
+        $("input[stop='']").val("");
+
+        // var rowCount = trips[0].stopNames.length; 
+        // var table = document.getElementById("stopTable");     
+        // var tbody = table.lastElementChild; 
+        // var row = tbody.insertRow(rowCount - 1);
+        
+        // var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
+        // var cell3 = row.insertCell(2);
+        // var cell4 = row.insertCell(3);
 
         
         
-        cell1.innerHTML = rowCount;
-        cell2.innerHTML = trips[0].stops[rowCount -1];
-        cell3.innerHTML = distances[rowCount -1];
-        cell4.innerHTML = durations[rowCount -1];
+        // cell1.innerHTML = rowCount;
+        // cell2.innerHTML = trips[0].stopNames[rowCount -1];
+        // cell3.innerHTML = trips[0].distances[rowCount -1];
+        // cell4.innerHTML = trips[0].durations[rowCount -1];
     }
+    $('body').on('click', '.btn-stop-delete', function() {
+        let stopToDel = $(this).parents('tr').attr('stop-name');
+        var nameFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].stops.length; i++) {
+            if (trips[0].stops[i].name == stopToDel) {
+                
+                index = i;
+                nameFound = true;
+                break;
+            }
+        }
+        if (nameFound) {
+            trips[0].stops.splice(index, 1);
+            
+            
+        }
+        else {
+            alert("Event not found!");
+        }
+        stopCounter = stopCounter - 1;
+        $(this).parents('tr').remove();
+        
+    });
+
     function addEvent() {
             if (tripCreated) {
     
