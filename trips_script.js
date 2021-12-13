@@ -29,6 +29,14 @@
         this.duration = duration;
     }
 
+    function Expense(date, name, amount, owedTo) {
+        this.date = date;
+        this.name = name;
+        this.amount = amount;
+        this.owedTo = owedTo;
+        this.users = [];
+    }
+
     
 
     var tripCreated = false;
@@ -49,6 +57,7 @@
         this.events = [];
         this.distances = [];
         this.durations = [];
+        this.expenses=[];
     
 
         this.addEvent = function(event) {
@@ -381,11 +390,10 @@
         var desc=$(this).parents('tr').find("input[name='edit_desc']").val();
 
         let nameToEdit = $(this).parents('tr').attr('data-name');
-        let descToEdit = $(this).parents('tr').attr('data-desc');
         var nameFound = false;
         let index = 0;
         for (let i = 0; i<= trips[0].events.length; i++) {
-            if (trips[0].events[i].name == nameToEdit || trips[0].events[i].desc == descToEdit) {
+            if (trips[0].events[i].name == nameToEdit) {
                 
                 index = i;
                 nameFound = true;
@@ -489,7 +497,8 @@
 
         for(var checked of e){
             if(checked.checked){
-                owes[checked.value] += (expenditure / n);                
+                owes[checked.value] += (expenditure / n);    
+                           
             }   
         }
        
@@ -498,4 +507,136 @@
         for(let i = 1; i<= length; i++ ){
             table.rows[i].cells[2].innerHTML = owes[i - 1];
         }
+        
+        let expenseDate = $("#exDate").val();
+        let expenseName = $("#exName").val();
+        let expenseAmount = $("#expend").val();
+        let expenseOwed = $("#owedTo").val();
+        let expenseUsers = "";
+
+        
+        document.getElementById("expense_list_container").style.display = "block";
+        var newExpense = new Expense(expenseDate, expenseName, expenseAmount, expenseOwed);
+
+        for(var checked of e){
+            if(checked.checked){
+                newExpense.users.push(members[checked.value]);
+                if (checked.value == members.length -1){
+                expenseUsers = expenseUsers + members[checked.value];
+                } else {
+                expenseUsers = expenseUsers + members[checked.value] + ", ";
+                }
+                         
+            }   
+        }
+        
+        trips[0].expenses.push(newExpense);
+
+
+        $(".expense-table tbody").append("<tr ex-date='"+expenseDate+"' ex-name='"+expenseName+ "' ex-amount='"+expenseAmount+ "' ex-users='"+expenseUsers+  "' ex-owe='"+expenseOwed+ 
+        "'><td>"+expenseDate+"</td><td>"+expenseName+"</td><td>"+expenseAmount+"</td><td>"+expenseUsers+"</td><td>"+expenseOwed+
+        "</td><td><button class='btn btn-danger btn-lg btn-exp-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-exp-edit' type ='button'>Edit</button></td></tr></td></tr>");
+
+        $("input[stop='']").val("");
     }
+
+    $('body').on('click', '.btn-exp-delete', function() {
+        let expToDel = $(this).parents('tr').attr('ex-name');
+        var nameFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].expenses.length; i++) {
+            if (trips[0].expenses[i].name == expToDel) {
+                
+                index = i;
+                nameFound = true;
+                alert("found");
+                break;
+                
+            }
+        }
+        if (nameFound) {
+            trips[0].expenses.splice(index, 1);
+            
+            
+        }
+        else {
+            alert("Event not found!");
+        }
+        $(this).parents('tr').remove();
+        
+    });
+
+    $('body').on('click', '.btn-exp-edit', function() {
+        var date =$(this).parents('tr').attr('ex-date');
+        var name =$(this).parents('tr').attr('ex-name');
+        var amount =$(this).parents('tr').attr('ex-amount');
+        var users =$(this).parents('tr').attr('ex-users');
+        var owe =$(this).parents('tr').attr('ex-owe');
+        
+
+        $(this).parents('tr').find('td:eq(0)').html("<input type ='date' name='edit_ex_date' value='"+date+"'>");
+        $(this).parents('tr').find('td:eq(1)').html("<input type ='text' name='edit_ex_name' value='"+name+"'>");
+        $(this).parents('tr').find('td:eq(2)').html("<input type ='text' name='edit_ex_amount' value='"+amount+"'>");
+        $(this).parents('tr').find('td:eq(3)').html("<input type ='text' name='edit_ex_users' value='"+users+"'>");
+        $(this).parents('tr').find('td:eq(4)').html("<input type ='text' name='edit_ex_owe' value='"+owe+"'>");
+
+        $(this).parents('tr').find('td:eq(5)').prepend("<button type='button' class ='btn btn-info btn-exp-update mr-3'>Update</button>");  
+        $(this).hide()
+
+        var input5 = document.getElementById("edit_loc"); 
+        var autocomplete5 = new google.maps.places.Autocomplete(input5, eventOptions);
+    });
+
+    $('body').on('click', '.btn-exp-update',function(){
+        var date=$(this).parents('tr').find("input[name='edit_ex_date']").val();
+        var name=$(this).parents('tr').find("input[name='edit_ex_name']").val();
+        var amount=$(this).parents('tr').find("input[name='edit_ex_amount']").val();
+        var users=$(this).parents('tr').find("input[name='edit_ex_users']").val();
+        var owe=$(this).parents('tr').find("input[name='edit_ex_owe']").val();
+        
+
+        let nameToEdit = $(this).parents('tr').attr('ex-name');
+        
+        var nameFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].expenses.length; i++) {
+            if (trips[0].expenses[i].name == nameToEdit) {
+                
+                index = i;
+                nameFound = true;
+                break;
+            }
+        }
+
+        $(this).parents('tr').find('td:eq(0)').text(date);
+        $(this).parents('tr').find('td:eq(1)').text(name);
+        $(this).parents('tr').find('td:eq(2)').text(amount);
+        $(this).parents('tr').find('td:eq(3)').text(users);
+        $(this).parents('tr').find('td:eq(4)').text(owe);
+
+        $(this).parents('tr').attr('ex-date', date);
+        $(this).parents('tr').attr('ex-name', name);
+        $(this).parents('tr').attr('ex-amount', amount);
+        $(this).parents('tr').attr('ex-users', users);
+        $(this).parents('tr').attr('ex-owe', owe);
+
+    
+        if (nameFound) {
+            trips[0].expenses[index].name = name;
+            trips[0].expenses[index].date = date;
+            trips[0].expenses[index].amount = amount;
+            trips[0].expenses[index].owe = owe;
+            trips[0].expenses[index].users = users.split(', ');
+            
+        }
+        
+        else {
+            alert("Event not found!");
+        }
+        
+        alert(trips[0].expenses[0].users);
+
+
+        $(this).parents('tr').find('.btn-edit').show();
+        $(this).parents('tr').find('.btn-update').remove();
+    });

@@ -98,10 +98,14 @@
             
             <div id="trip_expense_body">
                 <form class="form-control">
+                    <label>Date: </label>
+                    <input type = "date" id = "exDate">
                     <label for="member_name">Title: </label>
                     <input type="text" placeholder="Enter Name" id="exName"/>
                     <label>Expenditure: </label>
                     <input type="number" placeholder="Total Spent" id="expend" />
+                    <label>Owed to</label>
+                    <input type="text" id="owedTo">
 
                     <ul id="memberList" style="list-style: none;">
                         <label>Add Members:</label>
@@ -110,6 +114,33 @@
                 <button onclick="addExpense()">Add Expense</button>
             </div>
             
+        </div>
+
+        <div id="expense_list_container" style="display: none;">
+            <div id="expense_list_header">
+                Expense List
+            </div>
+            <div id="expense_list_body">
+                <div class="expense_display">
+                    
+                </div>
+                
+                <div class="expenseTable">
+                    <table id="expenseTable" class = "table table-bordered expense-table">
+                        <thead style="text-align: center;">
+                            <th style="width: 16.666%;">Date</th>
+                            <th style="width: 16.666%;">Name</th>
+                            <th style="width: 16.666%;">Amount</th>
+                            <th style="width: 16.666%;">Users</th>
+                            <th style="width: 16.666%;">Owed to</th>
+                            <th style="width: 16.666%;">Action</th>
+                        </thead>
+                        <tbody>
+    
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <div id="budget_split_container" style="display: none;">
@@ -162,8 +193,7 @@
             </div>
             <div id="stop_list_body">
                 <div class="stop_display">
-                    <span id="min" style="padding: 24px 0px;"></span>
-                    <span id="max" style="padding: 24px 0px;"></span>
+                    
                 </div>
                 
                 <div class="stopTable">

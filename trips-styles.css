@@ -329,3 +329,37 @@ button:hover{
     padding-bottom: 10px;
     text-align: center;
 }
+
+#expense_list_container{
+    margin: 30px 0 5px 0;
+    background-color: rgb(53, 53, 53);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 7px;
+    border-width: thin;
+    border-color: antiquewhite;
+    border-style: solid;
+}
+
+#expense_list_header{
+    padding: 10px 5px;
+    font-size: 30px;
+    text-align: center;
+    color: #ddd;
+}
+
+#expense_list_body{
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.expenseTable{
+    display: flex;
+    color: #ddd;
+}
+
+#expenseTable{
+    margin: 0 auto;
+    width: 95%;
+}
