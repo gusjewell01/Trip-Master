@@ -95,3 +95,9 @@ h1, h2{
     background-color: red;
     margin: 40% 20% 40% 20%;
 }
+
+h3{
+color: black;
+font-family: "Lucida Console", monospace;
+font-size: 30px;
+}
