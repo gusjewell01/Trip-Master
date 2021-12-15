@@ -37,7 +37,7 @@
         this.users = [];
     }
 
-    function Image(date, name, src, loc) {
+    function tripImage(date, name, src, loc) {
         this.date = date;
         this.name = name;
         this.src = src;
@@ -149,13 +149,109 @@
         }
     });
 
+    //add image to trip object and html row site
     $("#addImage").click(function() {
         document.getElementById("images_container").style.display = "block";
+        imageName = $('#imageName').val();
+        imageDate = $('#imageDate').val();
+        imageLocation = $('#imageLocation').val();
 
-        trips[0].images.push(previewImage.src);
+
         Hsrc = previewImage.src;
-        $(".image-table tbody").append("<tr><td class = 'table-image'><img src='"+Hsrc+"' class='image-table__image'></td></tr>");
+        newImage = new tripImage(imageDate, imageName, Hsrc, imageLocation);
+        trips[0].images.push(newImage);
 
+
+        $(".image-table tbody").append("<tr image-src = '"+Hsrc+"'image-date ='"+imageDate+"' image-name='"+imageName+"' image-loc='"+imageLocation+
+        "'><td class = 'table-image'><img src='"+Hsrc+"' class='image-table__image'></td><td>"+imageDate+"</td><td>"+imageName+
+        "</td><td>"+imageLocation+"</td><td><button class='btn btn-danger btn-lg btn-image-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-image-edit' type ='button'>Edit</button></td></tr>");
+
+    });
+
+    //remove image from trip object and html row site
+    $('body').on('click', '.btn-image-delete', function() {
+        let imageToDel = $(this).parents('tr').attr('image-name');
+        var nameFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].images.length; i++) {
+            if (trips[0].images[i].name == imageToDel) {
+                
+                index = i;
+                nameFound = true;
+                break;
+            }
+        }
+        if (nameFound) {
+            trips[0].images.splice(index, 1);
+            
+            
+        }
+        else {
+            alert("Event not found!");
+        }
+        $(this).parents('tr').remove();
+        
+    });
+
+    //open forms to edit image values
+    $('body').on('click', '.btn-image-edit', function() {
+        var date =$(this).parents('tr').attr('image-date');
+        var name =$(this).parents('tr').attr('image-name');  
+        var loc =$(this).parents('tr').attr('image-loc');
+
+        $(this).parents('tr').find('td:eq(1)').html("<input type ='date' name='edit_image_date' value='"+date+"'>");
+        $(this).parents('tr').find('td:eq(2)').html("<input type ='text' name='edit_image_name' value='"+name+"'>");
+        $(this).parents('tr').find('td:eq(3)').html("<input type ='text' id = 'edit_image_loc' name='edit_image_loc' value='"+loc+"'>");
+
+        $(this).parents('tr').find('td:eq(4)').prepend("<button type='button' class ='btn btn-info btn-image-update mr-3'>Update</button>");  
+        $(this).hide()
+
+        var updateLoc = document.getElementById("edit_image_loc"); 
+        var autocompleteImage = new google.maps.places.Autocomplete(updateLoc, options);
+    });
+
+    //save edited values to trip object and site 
+    $('body').on('click', '.btn-image-update',function(){
+        var date=$(this).parents('tr').find("input[name='edit_image_date']").val();
+        var name=$(this).parents('tr').find("input[name='edit_image_name']").val();
+        var loc=$(this).parents('tr').find("input[name='edit_image_loc']").val();
+
+        let imageToEdit = $(this).parents('tr').attr('image-src');
+        var imageFound = false;
+        let index = 0;
+        for (let i = 0; i<= trips[0].images.length; i++) {
+            if (trips[0].images[i].src == imageToEdit) {
+                
+                index = i;
+                imageFound = true;
+                break;
+            }
+        }
+
+        $(this).parents('tr').find('td:eq(1)').text(date);
+        $(this).parents('tr').find('td:eq(2)').text(name);
+        $(this).parents('tr').find('td:eq(3)').text(loc);
+
+        $(this).parents('tr').attr('image-date', date);
+        $(this).parents('tr').attr('image-name', name);
+        $(this).parents('tr').attr('image-loc', loc);
+
+    
+        if (imageFound) {
+            trips[0].images[index].name = name;
+            trips[0].images[index].date = date;
+            trips[0].images[index].loc = loc;
+            
+        }
+        
+        else {
+            alert("Image not found!");
+        }
+        
+
+
+        $(this).parents('tr').find('.btn-image-edit').show();
+        $(this).parents('tr').find('.btn-image-update').remove();
     });
 
 
@@ -221,6 +317,7 @@
     var eventOptions = {
         types: ['establishment']
     }
+
     //create autocomplete objects for inputs
     var input1 = document.getElementById("from");
     var autocomplete1 = new google.maps.places.Autocomplete(input1, options);
@@ -234,6 +331,8 @@
     var input4 = document.getElementById("eventLoc"); 
     var autocomplete4 = new google.maps.places.Autocomplete(input4, eventOptions);
 
+    var input5 = document.getElementById("imageLocation"); 
+    var autocomplete4 = new google.maps.places.Autocomplete(input5, options);
 
     let stopCounter = 0;
     function calcStop() {

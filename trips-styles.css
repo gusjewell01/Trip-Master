@@ -445,8 +445,8 @@ button:hover{
 }
 
 .table-image {
-    width: 300px;
-    min-height: 100px;
+    width: 600px;
+    min-height: 200px;
     border: 2px solid #dddddd;
     margin-top: 15px;
     margin-left: auto;
