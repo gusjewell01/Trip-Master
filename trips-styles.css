@@ -506,3 +506,42 @@ text-align: center;
     margin-right: auto;
     text-align: center;
 }
+
+#new_map{
+    margin-top: 30px;
+    display: grid;
+    grid-template-rows: auto 15px auto 15px auto;
+    
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: rgb(53, 53, 53);
+    margin: 30px 0 5px 0;
+    background-color: rgb(53, 53, 53);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 7px;
+    border-width: thin;
+    border-color: antiquewhite;
+    border-style: solid;
+    text-align: center;
+    justify-content: center;
+}
+
+#new_map #other_map{
+    padding: 10x;
+    margin: 30px;
+    height:450px;
+    border-radius: 15px;
+    
+}
+
+#new_output, #trip__Name{
+    padding:15px;
+    text-align: center;
+    color: white;
+}
+
+#trip__Name{
+    font-size: 46px;
+}

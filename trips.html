@@ -19,7 +19,7 @@
         <br>
         <div id="filter_main">
             <div id="trips_title">Trips</div>
-            <div id="new_trip" >New Trip</div>
+            <div id="new_trip" >Delete Trip</div>
         </div>
         <div id='new_trip_body'>
             <h1>New Trip</h1>
@@ -58,19 +58,27 @@
                     <input type="date" id = 'endDate'>
                 </div>
                 <br>
-                
+                <div id="output">
+
+                </div>
                     
                 </form>
                 <button class="btn btn-info btn-lg " onclick="calcRoute();"><i class="fas fa-map-signs"></i></button>
                 <br>
                 <button id = "create">Create!</button>
-                <div id="output">
-
-                </div>
             </div>
             
         </div>
         <!-- <div id=trips_main></div> -->
+        <div id='new_map' >
+            <div id='trip__Name'></div>
+            <br>
+            <div id="other_map"></div>
+            <br>
+            <div id="new_output">
+
+            </div>
+        </div>
         
         <div id= "trip_members_container" style="display: none;">
             <div id="trip_members_header">
