@@ -58,6 +58,7 @@
         this.distances = [];
         this.durations = [];
         this.expenses=[];
+        this.images=[];
     
 
         this.addEvent = function(event) {
@@ -81,6 +82,8 @@
         }
     }
     var max, min;
+
+    //create trip object, add stop/trip members/event control
     $("#create").click(function() {
         
         let name = $("#tripname").val();
@@ -103,8 +106,40 @@
         document.getElementById("trip_members_container").style.display = "block";
         document.getElementById("add_stop_container").style.display = "block";
         document.getElementById("add_event_container").style.display = "block";
+        document.getElementById("add_image_container").style.display = "block";
+
+
         max = document.getElementById("maxBudget").value;
         min = document.getElementById("minBudget").value;
+    });
+
+
+    
+    const inpFile = document.getElementById("inpFile");
+    const previewContainer = document.getElementById("imagePreview");
+    const previewImage = previewContainer.querySelector(".image-preview__image");
+    const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+
+    //display image preview 
+    inpFile.addEventListener("change", function(){
+        const file = this.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            previewDefaultText.style.display = "none";
+            previewImage.style.display = "block";
+
+            reader.addEventListener("load", function() {
+                previewImage.setAttribute("src", this.result);
+            });
+            reader.readAsDataURL(file); 
+        } else {
+            //remove image preview when no file selected
+            previewDefaultText.style.display = "none";
+            previewImage.style.display = "block";
+            previewImage.setAttribute("src", "");
+        }
     });
 
     var myLatLng = { lat: 35.397, lng: -80.844 };
@@ -228,6 +263,7 @@
         
     }
 
+    //save stop to trip object and site html, set stop table to active
     function addStop() {
         document.getElementById("stop_list_container").style.display = "block";
         var newStop = new Stop(stopCounter, trips[0].getStopNames()[stopCounter], trips[0].distances[stopCounter-1], trips[0].durations[stopCounter-1]);
@@ -246,23 +282,10 @@
 
         $("input[stop='']").val("");
 
-        // var rowCount = trips[0].stopNames.length; 
-        // var table = document.getElementById("stopTable");     
-        // var tbody = table.lastElementChild; 
-        // var row = tbody.insertRow(rowCount - 1);
-        
-        // var cell1 = row.insertCell(0);
-        // var cell2 = row.insertCell(1);
-        // var cell3 = row.insertCell(2);
-        // var cell4 = row.insertCell(3);
-
-        
-        
-        // cell1.innerHTML = rowCount;
-        // cell2.innerHTML = trips[0].stopNames[rowCount -1];
-        // cell3.innerHTML = trips[0].distances[rowCount -1];
-        // cell4.innerHTML = trips[0].durations[rowCount -1];
+    
     }
+
+    //delete stop from row on site and trip object
     $('body').on('click', '.btn-stop-delete', function() {
         let stopToDel = $(this).parents('tr').attr('stop-name');
         var nameFound = false;
@@ -288,6 +311,7 @@
         
     });
 
+    //add event to trip object and site row display
     function addEvent() {
             if (tripCreated) {
     
@@ -335,6 +359,7 @@
         
     }
 
+    //delete event from site row and trip object
     $('body').on('click', '.btn-delete', function() {
         let eventToDel = $(this).parents('tr').attr('data-name');
         var nameFound = false;
@@ -359,6 +384,7 @@
         
     });
 
+    //open forms to edit event values
     $('body').on('click', '.btn-edit', function() {
         var date =$(this).parents('tr').attr('data-date');
         var name =$(this).parents('tr').attr('data-name');
@@ -381,6 +407,7 @@
         var autocomplete5 = new google.maps.places.Autocomplete(input5, eventOptions);
     });
 
+    //save edited values to trip object and site 
     $('body').on('click', '.btn-update',function(){
         var date=$(this).parents('tr').find("input[name='edit_date']").val();
         var name=$(this).parents('tr').find("input[name='edit_name']").val();
@@ -437,7 +464,7 @@
     });
 
     
-
+    //add member to trip object and expense list table
     function addMember(){
         document.getElementById("budget_split_container").style.display = "block";
         document.getElementById("trip_expense_container").style.display = "block";
@@ -468,6 +495,7 @@
 
     }
 
+    //split budget between memebers
     function split(){
         let length = members.length;
         var table = document.getElementById("memberTable");
@@ -482,6 +510,8 @@
     }
 
     var expenditure;
+
+    //add expense to trip object and owed amounts
     function addExpense(){
         var n = 0;
         expenditure = document.getElementById("expend").value;
@@ -540,6 +570,7 @@
         $("input[stop='']").val("");
     }
 
+    //delete expense row from site and trip object
     $('body').on('click', '.btn-exp-delete', function() {
         let expToDel = $(this).parents('tr').attr('ex-name');
         var nameFound = false;
@@ -566,6 +597,7 @@
         
     });
 
+// open forms to edit expense values
     $('body').on('click', '.btn-exp-edit', function() {
         var date =$(this).parents('tr').attr('ex-date');
         var name =$(this).parents('tr').attr('ex-name');
@@ -587,6 +619,7 @@
         var autocomplete5 = new google.maps.places.Autocomplete(input5, eventOptions);
     });
 
+    //update values on site and trip object
     $('body').on('click', '.btn-exp-update',function(){
         var date=$(this).parents('tr').find("input[name='edit_ex_date']").val();
         var name=$(this).parents('tr').find("input[name='edit_ex_name']").val();
