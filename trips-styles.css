@@ -475,6 +475,8 @@ button:hover{
     border-width: thin;
     border-color: antiquewhite;
     border-style: solid;
+    text-align: center;
+    justify-content: center;
 }
 
 #calendar_header{
@@ -484,10 +486,23 @@ button:hover{
     color: #ddd;
 }
 
-.calendar {
+#calendar {
 justify-content: center;
+margin-left: auto;
+margin-right: auto;
+text-align: center;
 }
 
-.calendarButton {
-justify-content: center;
+
+#calendarButton {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;}
+
+#calendarIframe {
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 }
