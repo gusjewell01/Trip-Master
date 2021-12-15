@@ -462,7 +462,9 @@
                 }
                 if (!eventConflict) {
                     trips[0].addEvent(new Event(eventDate, eventName, startTime, endTime, eventLoc, eventDesc));
+                    //show event table and calendar
                     document.getElementById("event_list_container").style.display = "block";
+                    document.getElementById("calendar_container").style.display = "block";
 
                     $(".data-table tbody").append("<tr data-date='"+eventDate+"' data-name='"+eventName+ "' data-start='"+startTime+  "' data-end='"+endTime+ "' data-loc='"+eventLoc+ "' data-desc='"+eventDesc+
                     "'><td>"+eventDate+"</td><td>"+eventName+"</td><td>"+startTime+"</td><td>"+endTime+"</td><td>"+eventLoc+"</td><td>"+eventDesc+

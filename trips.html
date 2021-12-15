@@ -5,7 +5,7 @@
         <title>Trip Master</title>
         <script src="https://kit.fontawesome.com/6d64bbbc4b.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="trips-styles.css">
-        
+        <script type="text/javascript" src="https://addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
     </head>
     <body>
         <div id="nav_bar">
@@ -261,6 +261,27 @@
                     </table>
                 </div>
             </div>
+        </div>
+
+
+        <div id="calendar_container" style="display: none;">
+            <div id="calendar_header">
+                Event Calendar
+            </div>
+            <div id="calendar">
+            <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=America%2FNew_York&src=bmJ2MjE4OHM5ZjA3OWZzdTRwcWJvdWtyNThAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%239E69AF&color=%23D81B60" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div id="calendarButton" title="Add to Calendar" class="addeventatc">
+                Add to Calendar
+                <span class="start">12/29/2021 08:00 AM</span>
+                <span class="end">12/29/2021 10:00 AM</span>
+                <span class="timezone">America/Los_Angeles
+            </span>
+                <span class="title">Summary of the event</span>
+                <span class="description">Description of the event</span>
+                <span class="location">Location of the event</span>
+            </div>
+
         </div>
 
         <div id = "add_image_container" style="display: none;">
