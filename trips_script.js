@@ -466,6 +466,7 @@
                     document.getElementById("event_list_container").style.display = "block";
                     document.getElementById("calendar_container").style.display = "block";
 
+
                     //fill event details into add to calendar button
                     document.getElementById("calendarAddStart").innerHTML = eventDate + " " + startTime;
                     document.getElementById("calendarAddEnd").innerHTML = eventDate + " " + endTime;
@@ -484,6 +485,10 @@
             alert("No Active Trip!");
         
     }
+
+    $("#calendarButton").click(function (){
+        
+    });
 
     //delete event from site row and trip object
     $('body').on('click', '.btn-delete', function() {
