@@ -1,15 +1,15 @@
 window.onload = function(){
     var people = [{
-        name: 'matthew',
+        name: 'Matthew',
         email: 'matthew@gmail.com'
     },{
-        name: 'mark',
+        name: 'Mark',
         email: 'mark@gmail.com'
     },{
-        name: 'luke',
+        name: 'Luke',
         email: 'luke@gmail.com'
     },{
-        name: 'john',
+        name: 'John',
         email: 'john@gmail.com'
     },];
 
@@ -47,11 +47,11 @@ window.onload = function(){
             if(!added){
                 alert('User Not Found!');
             }
-            
+
         }
     });
 
-    
+
     if (friends.length == 0){
         $('#friends').html('You have no friends :(');
     } else {
@@ -59,8 +59,8 @@ window.onload = function(){
         for(let i = 0; i<friends.length; i++){
             html+="<div class='friend'>"+
                 "<div class='info'>"+
-                    "<h1>" + friends[i].name + "</h1>"+
-                    "<h2>" + friends[i].email + "</h2>"+
+                    "<li>" + "Name: " + friends[i].name + "</h2>"+
+                    "<li>" + "Email: " + friends[i].email + "</h3>"+
                 "</div>"+
                 "<button class='remove_button'>Remove</button>"+
             "</div>"
