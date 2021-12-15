@@ -466,6 +466,13 @@
                     document.getElementById("event_list_container").style.display = "block";
                     document.getElementById("calendar_container").style.display = "block";
 
+                    //fill event details into add to calendar button
+                    document.getElementById("calendarAddStart").innerHTML = eventDate + " " + startTime;
+                    document.getElementById("calendarAddEnd").innerHTML = eventDate + " " + endTime;
+                    document.getElementById("calendarAddTitle").innerHTML = eventName;
+                    document.getElementById("calendarAddDesc").innerHTML = eventDesc;
+                    document.getElementById("calendarAddLoc").innerHTML = eventLoc;
+
                     $(".data-table tbody").append("<tr data-date='"+eventDate+"' data-name='"+eventName+ "' data-start='"+startTime+  "' data-end='"+endTime+ "' data-loc='"+eventLoc+ "' data-desc='"+eventDesc+
                     "'><td>"+eventDate+"</td><td>"+eventName+"</td><td>"+startTime+"</td><td>"+endTime+"</td><td>"+eventLoc+"</td><td>"+eventDesc+
                     "</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type ='button'>Edit</button></td></tr>");
