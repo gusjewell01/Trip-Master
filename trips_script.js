@@ -37,6 +37,13 @@
         this.users = [];
     }
 
+    function Image(date, name, src, loc) {
+        this.date = date;
+        this.name = name;
+        this.src = src;
+        this.loc = loc;
+    }
+
     
 
     var tripCreated = false;
@@ -136,11 +143,22 @@
             reader.readAsDataURL(file); 
         } else {
             //remove image preview when no file selected
-            previewDefaultText.style.display = "none";
-            previewImage.style.display = "block";
+            previewDefaultText.style.display = "block";
+            previewImage.style.display = "none";
             previewImage.setAttribute("src", "");
         }
     });
+
+    $("#addImage").click(function() {
+        document.getElementById("images_container").style.display = "block";
+
+        trips[0].images.push(previewImage.src);
+        Hsrc = previewImage.src;
+        $(".image-table tbody").append("<tr><td class = 'table-image'><img src='"+Hsrc+"' class='image-table__image'></td></tr>");
+
+    });
+
+
 
     var myLatLng = { lat: 35.397, lng: -80.844 };
     var mapOptions = {
