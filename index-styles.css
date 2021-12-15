@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap');
 
+
 body{
     background: linear-gradient(to left top, blue, red) fixed;
     -webkit-background-size: cover;
@@ -69,4 +70,15 @@ body{
     animation-name: bigPlane;
     animation-timing-function: linear;
     animation-duration: 10s;
+}
+
+#title{
+    position: fixed;
+    top: 30%;
+    left:65%;
+    font-family: 'Noto Serif', serif;
+    font-size: 52px;
+    background-color: rgb(53, 53, 53);
+    padding:15px;
+    color: white;
 }
