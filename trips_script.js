@@ -24,6 +24,86 @@ if('trip' in localStorage){
     document.getElementById("add_event_container").style.display = "block";
     document.getElementById("add_image_container").style.display = "block";
     document.getElementById("new_map").style.display = "block";
+
+    if (trips[0].stops.length > 0) {
+        document.getElementById("stop_list_container").style.display = "block";
+
+        for (let i = 0; i <trips[0].stops.length; i++) {
+            let stopNumber = trips[0].stops[i].number;
+            let stopName = trips[0].stops[i].name;
+            let stopDistance = trips[0].distances[i];
+            let stopDuration = trips[0].durations[i];
+
+
+            
+
+            $(".stop-table tbody").append("<tr stop-num='"+stopNumber+"' stop-name='"+stopName+ "' stop-dist='"+stopDistance+  "' stop-dur='"+stopDuration+ 
+            "'><td>"+stopNumber+"</td><td>"+stopName+"</td><td>"+stopDistance+"</td><td>"+stopDuration+
+            "</td><td><button class='btn btn-danger btn-lg btn-stop-delete mr-3' type ='button'>Delete</button></td></tr>");
+
+            $("input[stop='']").val("");
+
+        }
+    }
+
+    if (trips[0].events.length > 0) {
+        document.getElementById("event_list_container").style.display = "block";
+                document.getElementById("calendar_container").style.display = "block";
+
+                for (let i = 0; i<trips[0].events.length; i++) {
+                //fill event details into add to calendar button
+                let eventDate = trips[0].events[i].date;
+                let eventName = trips[0].events[i].name;
+                let startTime = trips[0].events[i].start;
+                let endTime = trips[0].events[i].end;
+                let eventLoc = trips[0].events[i].loc;
+                let eventDesc = trips[0].events[i].desc;
+
+                $(".data-table tbody").append("<tr data-date='"+eventDate+"' data-name='"+eventName+ "' data-start='"+startTime+  "' data-end='"+endTime+ "' data-loc='"+eventLoc+ "' data-desc='"+eventDesc+
+                "'><td>"+eventDate+"</td><td>"+eventName+"</td><td>"+startTime+"</td><td>"+endTime+"</td><td>"+eventLoc+"</td><td>"+eventDesc+
+                "</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type ='button'>Edit</button></td></tr>");
+
+                $("input[eventName='']").val("");
+                }
+    }
+
+    if (trips[0].expenses.length > 0) {
+        document.getElementById("expense_list_container").style.display = "block";
+        for (let i = 0; i < trips[0].expenses.length; i++) {
+        expenseDate = trips[0].expenses[i].date;
+        expenseName = trips[0].expenses[i].name;
+        expenseAmount = trips[0].expenses[i].amount;
+        expenseUsers = trips[0].expenses[i].users;
+        expenseOwed = trips[0].expenses[i].owedTo;
+         
+            
+        $(".expense-table tbody").append("<tr ex-date='"+expenseDate+"' ex-name='"+expenseName+ "' ex-amount='"+expenseAmount+ "' ex-users='"+expenseUsers+  "' ex-owe='"+expenseOwed+ 
+        "'><td>"+expenseDate+"</td><td>"+expenseName+"</td><td>"+expenseAmount+"</td><td>"+expenseUsers+"</td><td>"+expenseOwed+
+        "</td><td><button class='btn btn-danger btn-lg btn-exp-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-exp-edit' type ='button'>Edit</button></td></tr></td></tr>");
+
+        }
+
+    }
+
+    if (trips[0].images.length > 0 ){
+        document.getElementById("images_container").style.display = "block";
+
+        for (let i = 0; i< trips[0].images.length; i++) {
+        imageName = trips[0].images[i].name;
+        imageDate = trips[0].images[i].date;
+        imageLocation = trips[0].images[i].loc;
+
+
+        Hsrc = trips[0].images[i].src;
+        
+
+
+        $(".image-table tbody").append("<tr image-src = '"+Hsrc+"'image-date ='"+imageDate+"' image-name='"+imageName+"' image-loc='"+imageLocation+
+        "'><td class = 'table-image'><img src='"+Hsrc+"' class='image-table__image'></td><td>"+imageDate+"</td><td>"+imageName+
+        "</td><td>"+imageLocation+"</td><td><button class='btn btn-danger btn-lg btn-image-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-image-edit' type ='button'>Edit</button></td></tr>");
+        }
+
+    }
 }
 
 function Event(date, name, start, end, loc, desc) {
@@ -73,7 +153,7 @@ function Trip(user, name, origin, destination, minBudget, maxBudget, interests, 
     this.start = start;
     this.end = end;
     this.stopNames = [origin];
-    this.stops = [origin];
+    this.stops = [];
     this.events = [];
     this.distances = [];
     this.durations = [];
@@ -128,7 +208,7 @@ $("#create").click(function() {
     document.getElementById("add_event_container").style.display = "block";
     document.getElementById("add_image_container").style.display = "block";
 
-    localStorage.trip = JSON.stringify(Trip1);
+    localStorage.trip = JSON.stringify(trips[0]);
 
     max = document.getElementById("maxBudget").value;
     min = document.getElementById("minBudget").value;
@@ -171,16 +251,28 @@ $("#addImage").click(function() {
     imageName = $('#imageName').val();
     imageDate = $('#imageDate').val();
     imageLocation = $('#imageLocation').val();
-
-
     Hsrc = previewImage.src;
+
+    var imageConflict = false;
+
+    // for (let i = 0; i<trips[0].images.length; i++) {
+    //     if (imageName == trips[0].images[i].name) {
+    //         alert("Name conflict with image " + trips[0].images[i].name);
+    //         imageConflict = true;
+    //         break;
+    //     }
+        
+    // }
+    
     newImage = new tripImage(imageDate, imageName, Hsrc, imageLocation);
     trips[0].images.push(newImage);
 
-
+    if (!imageConflict) {
     $(".image-table tbody").append("<tr image-src = '"+Hsrc+"'image-date ='"+imageDate+"' image-name='"+imageName+"' image-loc='"+imageLocation+
     "'><td class = 'table-image'><img src='"+Hsrc+"' class='image-table__image'></td><td>"+imageDate+"</td><td>"+imageName+
     "</td><td>"+imageLocation+"</td><td><button class='btn btn-danger btn-lg btn-image-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-image-edit' type ='button'>Edit</button></td></tr>");
+    }
+    localStorage.trip = JSON.stringify(trips[0]);
 
 });
 
@@ -200,12 +292,15 @@ $('body').on('click', '.btn-image-delete', function() {
     if (nameFound) {
         trips[0].images.splice(index, 1);
         
-        
+        $(this).parents('tr').remove();
+
     }
     else {
         alert("Event not found!");
     }
-    $(this).parents('tr').remove();
+    
+    localStorage.trip = JSON.stringify(trips[0]);
+
     
 });
 
@@ -481,7 +576,8 @@ function addStop() {
             $("input[stop='']").val("");
             
             
-            
+            localStorage.trip = JSON.stringify(trips[0]);
+
         } else {
             //delete route from map
             directionsDisplay.setDirections({ routes: [] });
@@ -512,6 +608,11 @@ $('body').on('click', '.btn-stop-delete', function() {
     }
     if (nameFound) {
         trips[0].stops.splice(index, 1);
+        trips[0].stopNames.splice(index-1, 1);
+        trips[0].durations.splice(index-1, 1);
+        trips[0].distances.splice(index-1, 1);
+        localStorage.trip = JSON.stringify(trips[0]);
+
         
         
     }
@@ -520,12 +621,15 @@ $('body').on('click', '.btn-stop-delete', function() {
     }
     stopCounter = stopCounter - 1;
     $(this).parents('tr').remove();
+
+    localStorage.trip = JSON.stringify(trips[0]);
+
     
 });
 
 //add event to trip object and site row display
 function addEvent() {
-        if (tripCreated) {
+        
 
             var eventConflict = false;
             let eventDate = $("#eventDate").val();
@@ -556,7 +660,7 @@ function addEvent() {
                 
             }
             if (!eventConflict) {
-                trips[0].addEvent(new Event(eventDate, eventName, startTime, endTime, eventLoc, eventDesc));
+                trips[0].events.push(new Event(eventDate, eventName, startTime, endTime, eventLoc, eventDesc));
                 //show event table and calendar
                 document.getElementById("event_list_container").style.display = "block";
                 document.getElementById("calendar_container").style.display = "block";
@@ -574,10 +678,11 @@ function addEvent() {
                 "</td><td><button class='btn btn-danger btn-lg btn-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-edit' type ='button'>Edit</button></td></tr>");
 
                 $("input[eventName='']").val("");
+                localStorage.trip = JSON.stringify(trips[0]);
+
                 
             }
-        } else
-        alert("No Active Trip!");
+         
     
 }
 
@@ -600,7 +705,8 @@ $('body').on('click', '.btn-delete', function() {
     }
     if (nameFound) {
         trips[0].events.splice(index, 1);
-        
+        localStorage.trip = JSON.stringify(trips[0]);
+
         
     }
     else {
@@ -794,6 +900,9 @@ function addExpense(){
     "</td><td><button class='btn btn-danger btn-lg btn-exp-delete mr-3' type ='button'>Delete</button><button class='btn btn-info btn-lg btn-exp-edit' type ='button'>Edit</button></td></tr></td></tr>");
 
     $("input[stop='']").val("");
+
+    localStorage.trip = JSON.stringify(trips[0]);
+
 }
 
 //delete expense row from site and trip object
@@ -806,7 +915,6 @@ $('body').on('click', '.btn-exp-delete', function() {
             
             index = i;
             nameFound = true;
-            alert("found");
             break;
             
         }
@@ -820,6 +928,8 @@ $('body').on('click', '.btn-exp-delete', function() {
         alert("Event not found!");
     }
     $(this).parents('tr').remove();
+    localStorage.trip = JSON.stringify(trips[0]);
+
     
 });
 
@@ -893,7 +1003,6 @@ $('body').on('click', '.btn-exp-update',function(){
         alert("Event not found!");
     }
     
-    alert(trips[0].expenses[0].users);
 
 
     $(this).parents('tr').find('.btn-edit').show();
